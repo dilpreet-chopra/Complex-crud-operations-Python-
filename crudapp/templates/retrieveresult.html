@@ -1,0 +1,107 @@
+{% extends "sidebar.html" %}
+ {% block content %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>crudapp!</title>
+        <style>
+          .center{
+            margin-top: 20px;
+    	     border: 3px solid #353E44;} 
+          
+          .pagination li{
+     	      margin-left: 10px;}
+        </style>
+    
+  
+    </head>
+    <body>
+      <br>
+      {% if messages %}
+
+      {% for message in messages %}
+     {% if message.tags == "success" %} *
+      <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ message }}</strong>
+      </div>
+      {% endif %}
+      
+      {% if message.tags == "error" %} 
+      <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ message }}</strong>
+      </div>
+      {% endif %}
+    
+      {% endfor %}
+      {% endif %}
+
+      {% if data %} 
+      <h1 class="center">List of Information:</h1><br>
+      <div class="table-responsive">
+				<table class="table">
+				  <tr>
+            <th>EMPLOYEE NAME</th>
+            <th>EMPLOYEE SALARY</th>
+    				<th>DEPARTMENT NAME</th>
+    				<th>NO. OF EMPLOYESS</th>
+    				<th>HEAD OF DEPARTMENT</th>
+            <!-- {% if not submitbutton %} -->
+    				<th>Action</th>
+    				<th>Action</th>
+            <!-- {% endif %} -->
+					 </tr>
+           
+			    	{% for i in data %} 
+          <tr>
+            <td>{{ i.Ename }}</td>
+            <td>{{ i.Salary }}</td>
+			    	<td>{{ i.Name }}</td>
+			     <td>{{ i.Noofemp }}</td>
+			    	<td>{{ i.Hod }}</td>
+            <!-- {% if not submitbutton %} -->
+			   		<td>
+			    		<a href="/deleteTable/{{ i.Id }}">delete</a>
+			    	</td>
+			    	<td>
+			    		<a href="/insertTable/{{ i.Id }}">update</a>
+			    	</td>
+            <!-- {% endif %} -->
+			    </tr>
+			    	{% endfor %}
+				</table>
+			</div>
+		  
+      {% if data.has_other_pages %}
+      <ul class="pagination">
+      {% if data.has_previous %}
+        <li><a href="?page={{ data.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in data.paginator.page_range %}
+      {% if data.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+      {% if data.has_next %}
+        <li><a href="?page={{ data.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+      </ul>
+      {% endif %}
+    
+
+    {% else %}
+      <div class="alert alert-info">
+        <strong>Info!</strong> No Results found
+      </div>
+    {% endif %}
+    </body>
+</html>
+{% endblock %}

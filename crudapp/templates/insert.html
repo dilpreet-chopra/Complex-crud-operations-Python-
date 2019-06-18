@@ -1,0 +1,83 @@
+ {% extends "sidebar.html" %}
+ {% block content %}
+
+<html>
+	<head>
+		<style>
+	 		.center{
+	   			text-align: center;
+				border: 3px solid #353E44;
+				margin-top: 30px;} 
+	 		
+	 		.table{
+				margin-top: 30px;}
+		</style>
+	</head>
+	<body>
+		<br>
+		{% if message %}
+			<div class="alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>{{ message }}</strong>
+  			</div>
+  		{% endif %}	
+  		{% if errormsg %}
+			<div class="alert alert-danger alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>{{ errormsg }}</strong>
+  			</div>
+  		{% endif %}	
+		
+		<form action="{% url 'insert' data.Id %}" method="post" name="form1">
+			{% csrf_token %}
+			<h1 class="center"> Please Enter Following Data 
+
+			</h1> 
+			<div class="table-responsive">
+				<table class="table">	
+					<tr>
+						<td>EMPLOYEE NAME:</td>
+						<td>
+							<input type = "text" name = "empname" value="{{ data.Name }}" />
+						</td>
+					</tr>
+
+					<tr>
+						<td>SALARY:</td>
+						<td>
+							<input type = "text" name = "salary" value="{{ data.Noofemp }}"/>
+						</td>
+					</tr>
+
+					<tr>
+						<td>SELECT DEPARTMENT:</td>
+						<td>
+							<div class="form-group">
+  							<label for="sel1">Select Dept Id</label>
+  							<select class="form-control" name="deptid">
+  							{% for i in data %}
+   							<option value="{{i.Id}}">{{i.Id}} {{i.Name}}</option>
+   							{% endfor %}
+    						</select>
+    						</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td> </td>
+						<!-- <input type="hidden" name="upid" value="{{ data.Id }}"/> -->
+						<td><button type="submit" name="save">SAVE</button></td>
+					</tr>
+				</table>
+			</div>
+		</form>
+	</body>
+</html>
+
+{% endblock %}
+		
+
+	
+
+
+	
