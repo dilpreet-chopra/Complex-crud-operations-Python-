@@ -1,5 +1,5 @@
 adium-theme-ubuntu==0.3.4
-Django==1.11.20
+Django==1.11.28
 django-ckeditor==5.7.1
 django-cors-headers==3.0.1
 django-inline-actions==1.3.0
