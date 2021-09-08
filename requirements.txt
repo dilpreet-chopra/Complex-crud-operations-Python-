@@ -11,7 +11,7 @@ mysql-utilities==1.6.1
 mysqlclient==1.3.7
 paramiko==1.16.0
 pexpect==4.0.1
-Pillow==6.0.0
+Pillow==8.3.2
 ptyprocess==0.5
 pycrypto==2.6.1
 pymssql==2.1.3
